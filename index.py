@@ -18,10 +18,10 @@ def bot():
 
     # Get the last candle time
     candle_time = df.index[-1]
-
+    # send_message(symbol="EURUSD", signal="buy_signal", SL="1.133111")
     if signal:
         # Uncomment to send message
-        # send_message(symbol=signal["symbol"], signal=signal["signal"], SL=signal["SL"])
+        send_message(symbol=signal["symbol"], signal=signal["signal"], SL=signal["SL"])
         print(f"Time={candle_time}, Signal={signal['signal']}, SL={signal['SL']}")
 
 
