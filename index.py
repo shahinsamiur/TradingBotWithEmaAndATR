@@ -1,9 +1,8 @@
 from flask import Flask, request, jsonify, g
 from bot import bot
+import os
 
 app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://neondb_owner:npg_yuFa31xvZgfU@ep-shy-pine-a8d70zrz-pooler.eastus2.azure.neon.tech/neondb?sslmode=require'
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 @app.route('/')
 def home():
@@ -27,4 +26,5 @@ def coldStart():
         return jsonify({"status": "error", "message": str(e)}), 400
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
