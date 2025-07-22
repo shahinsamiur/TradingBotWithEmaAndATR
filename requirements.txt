@@ -1,0 +1,6 @@
+flask
+tvdatafeed @ git+https://github.com/rongardF/tvdatafeed.git
+# psycopg2-binary
+# flask_sqlalchemy
+pandas
+numpy

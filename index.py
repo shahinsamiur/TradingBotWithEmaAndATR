@@ -1,28 +1,30 @@
-from indicatios.ema import ema
-from indicatios.atr import atr_stoploss
-from getMarketData.getMarketDataFile import getMarketData
-from businesslogic.logic import botLogic
-from sendMessage.sendMessage import send_message
+from flask import Flask, request, jsonify, g
+from bot import bot
 
+app = Flask(__name__)
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://neondb_owner:npg_yuFa31xvZgfU@ep-shy-pine-a8d70zrz-pooler.eastus2.azure.neon.tech/neondb?sslmode=require'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-def bot():
-    print("Testing Trend Detection...\n")
+@app.route('/')
+def home():
+    return "Flask server is running!"
 
-    # Fetch full historical market data
-    fullData = getMarketData(symbols=['EURUSD'], exchange="OANDA", n_bars=200)
-    df = fullData['EURUSD']  # Assuming this is a DataFrame with datetime index
+@app.route('/runBot', methods=['GET'])
+def runBot():
+    try:
+        bot()
+        return "✅ Bot executed successfully"
+    except Exception as e:
+        print("❌ Bot error:", e)
+        return jsonify({"status": "error", "message": str(e)}), 500
 
-    # Send the full DataFrame to botLogic
-    marketDataByPair = {"EURUSD": df}
-    signal = botLogic(marketDataByPair)
+@app.route('/coldStart', methods=['GET'])
+def coldStart():
+    try:
+        return "🌡️ Cold Started"
+    except Exception as e:
+        print(e)
+        return jsonify({"status": "error", "message": str(e)}), 400
 
-    # Get the last candle time
-    candle_time = df.index[-1]
-    # send_message(symbol="EURUSD", signal="buy_signal", SL="1.133111")
-    if signal:
-        # Uncomment to send message
-        send_message(symbol=signal["symbol"], signal=signal["signal"], SL=signal["SL"])
-        print(f"Time={candle_time}, Signal={signal['signal']}, SL={signal['SL']}")
-
-
-bot()
+if __name__ == '__main__':
+    app.run(debug=True)
