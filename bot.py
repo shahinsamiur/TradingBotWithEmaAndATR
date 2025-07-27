@@ -9,20 +9,19 @@ def bot():
     # print("Testing Trend Detection...\n")
 
     # Fetch full historical market data
-    fullData = getMarketData(symbols=['EURUSD'], exchange="OANDA", n_bars=100)
-
-    if 'EURUSD' not in fullData or fullData['EURUSD'] is None:
-        print("❌ No data returned for EURUSD. Skipping logic.")
+    fullData = getMarketData(symbols=['BTCUSDT'], exchange="BINANCE", n_bars=100)
+    if 'BTCUSDT' not in fullData or fullData['BTCUSDT'] is None:
+        print("❌ No data returned for BTCUSDT. Skipping logic.")
         return
 
-    df = fullData['EURUSD']
+    df = fullData['BTCUSDT']
 
     if df.empty:
-        print("❌ DataFrame is empty for EURUSD.")
+        print("❌ DataFrame is empty for BTCUSDT.")
         return
 
     # Send the full DataFrame to botLogic
-    marketDataByPair = {"EURUSD": df}
+    marketDataByPair = {"BTCUSDT": df}
     signal = botLogic(marketDataByPair)
 
     candle_time = df.index[-1]
@@ -31,3 +30,5 @@ def bot():
         send_message(symbol=signal["symbol"], signal=signal["signal"], SL=signal["SL"])
         print(f"Time={candle_time}, Signal={signal['signal']}, SL={signal['SL']}")
 
+
+print(bot())

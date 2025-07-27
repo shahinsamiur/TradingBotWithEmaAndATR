@@ -2,18 +2,14 @@ from indicatios.atr import atr_stoploss
 from indicatios.ema import ema
 
 def botLogic(marketData):
-    symbol = "EURUSD"
-    
+    symbol = "BTCUSDT"
+
     # Get last two EMA values for both 21 and 50
-    ema50_prev = ema({"EURUSD": marketData[symbol].iloc[:-2]}, symbol, 'close', 50)
-    ema21_prev = ema({"EURUSD": marketData[symbol].iloc[:-2]}, symbol, 'close', 21)
+    ema50_prev = ema({symbol: marketData[symbol].iloc[:-2]}, symbol, 'close', 50)
+    ema21_prev = ema({symbol: marketData[symbol].iloc[:-2]}, symbol, 'close', 21)
 
-    ema50_curr =ema({"EURUSD": marketData[symbol].iloc[:-1]}, symbol, 'close', 50)
-    ema21_curr = ema({"EURUSD": marketData[symbol].iloc[:-1]}, symbol, 'close', 21)
-
-
-
-
+    ema50_curr =ema({symbol: marketData[symbol].iloc[:-1]}, symbol, 'close', 50)
+    ema21_curr = ema({symbol: marketData[symbol].iloc[:-1]}, symbol, 'close', 21)
 
     # print("ema21 : ",ema21_curr , ema21_prev)
     # print("ema50 : ",ema50_curr ,ema50_prev)
