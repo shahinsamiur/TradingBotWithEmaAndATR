@@ -3,7 +3,7 @@ from indicatios.ema import ema
 
 def botLogic(marketData):
     symbol = "BTCUSDT"
-
+    # print(marketData)
     # Get last two EMA values for both 21 and 50
     ema50_prev = ema({symbol: marketData[symbol].iloc[:-2]}, symbol, 'close', 50)
     ema21_prev = ema({symbol: marketData[symbol].iloc[:-2]}, symbol, 'close', 21)
@@ -11,10 +11,10 @@ def botLogic(marketData):
     ema50_curr =ema({symbol: marketData[symbol].iloc[:-1]}, symbol, 'close', 50)
     ema21_curr = ema({symbol: marketData[symbol].iloc[:-1]}, symbol, 'close', 21)
 
-    # print("ema21 : ",ema21_curr , ema21_prev)
-    # print("ema50 : ",ema50_curr ,ema50_prev)
-    # print(atr_stoploss(data=marketData[symbol] , newTrend="buy_signal"))
-    # print(atr_stoploss(data=marketData[symbol] , newTrend="sell_signal"))
+    print("ema21 : ",ema21_curr , ema21_prev)
+    print("ema50 : ",ema50_curr ,ema50_prev)
+    print(atr_stoploss(data=marketData[symbol] , newTrend="buy_signal"))
+    print(atr_stoploss(data=marketData[symbol] , newTrend="sell_signal"))
 
 
 

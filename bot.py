@@ -15,11 +15,11 @@ def bot():
         return
 
     df = fullData['BTCUSDT']
-
+     
     if df.empty:
         print("❌ DataFrame is empty for BTCUSDT.")
         return
-
+ 
     # Send the full DataFrame to botLogic
     marketDataByPair = {"BTCUSDT": df}
     signal = botLogic(marketDataByPair)
