@@ -1,7 +1,8 @@
 from flask import Flask, request, jsonify, g
 from bot import bot
 import os
-
+import sys
+import logging
 app = Flask(__name__)
 
 @app.route('/')
@@ -20,7 +21,8 @@ def runBot():
 @app.route('/coldStart', methods=['GET'])
 def coldStart():
     try:
-        print("cooled Stared")
+        logging.info("cooled Stared")
+        sys.stdout.flush()
         return "🌡️ Cold Started"
     
     except Exception as e:

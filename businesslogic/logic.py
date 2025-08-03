@@ -1,9 +1,10 @@
 from indicatios.atr import atr_stoploss
 from indicatios.ema import ema
-
+import sys
+import logging
 def botLogic(marketData):
     symbol = "BTCUSDT"
-    # print(marketData)
+    # logging.info(marketData)
     # Get last two EMA values for both 21 and 50
     ema50_prev = ema({symbol: marketData[symbol].iloc[:-2]}, symbol, 'close', 50)
     ema21_prev = ema({symbol: marketData[symbol].iloc[:-2]}, symbol, 'close', 21)
@@ -11,10 +12,15 @@ def botLogic(marketData):
     ema50_curr =ema({symbol: marketData[symbol].iloc[:-1]}, symbol, 'close', 50)
     ema21_curr = ema({symbol: marketData[symbol].iloc[:-1]}, symbol, 'close', 21)
 
-    print("ema21 : ",ema21_curr , ema21_prev)
-    print("ema50 : ",ema50_curr ,ema50_prev)
-    print(atr_stoploss(data=marketData[symbol] , newTrend="buy_signal"))
-    print(atr_stoploss(data=marketData[symbol] , newTrend="sell_signal"))
+    logging.info(f"ema21: curr={ema21_curr}, prev={ema21_prev}")
+    logging.info(f"ema50: curr={ema50_curr}, prev={ema50_prev}")
+
+    buy_sl = atr_stoploss(data=marketData[symbol], newTrend="buy_signal")
+    logging.info(f"Buy SL: {buy_sl}")
+
+    sell_sl = atr_stoploss(data=marketData[symbol], newTrend="sell_signal")
+    logging.info(f"Sell SL: {sell_sl}")
+
 
 
 
