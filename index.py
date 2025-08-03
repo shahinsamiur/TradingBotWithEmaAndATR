@@ -20,7 +20,9 @@ def runBot():
 @app.route('/coldStart', methods=['GET'])
 def coldStart():
     try:
+        print("cooled Stared")
         return "🌡️ Cold Started"
+    
     except Exception as e:
         print(e)
         return jsonify({"status": "error", "message": str(e)}), 400
