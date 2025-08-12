@@ -49,4 +49,4 @@ def bot():
         else:
             continue
 
-bot()
+# bot()

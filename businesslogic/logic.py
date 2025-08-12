@@ -1,8 +1,6 @@
 from indicatios.atr import atr_stoploss
 from indicatios.ema import ema
 from sendMessage.testSendMessage import send_message
-import sys
-import logging
 def botLogic(marketData):
     symbol = "BTCUSDT"
     # logging.info(marketData)

@@ -31,4 +31,3 @@ def bot():
         print(f"Time={candle_time}, Signal={signal['signal']}, SL={signal['SL']}")
 
 
-print(bot())
