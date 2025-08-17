@@ -1,4 +1,3 @@
-import pandas as pd
 
 def ema(data, symbol, column='close', length=50):
     df = data[symbol]

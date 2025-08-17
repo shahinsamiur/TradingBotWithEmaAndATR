@@ -1,33 +1,42 @@
-from indicatios.ema import ema
-from indicatios.atr import atr_stoploss
+import time
 from getMarketData.getMarketDataFile import getMarketData
 from businesslogic.logic import botLogic
 from sendMessage.sendMessage import send_message
 
+last_signal_time = {}
 
 def bot():
-    # print("Testing Trend Detection...\n")
+    symbols = ['BTCUSDT', 'ETHUSDT', 'BNBUSDT']
 
-    # Fetch full historical market data
-    fullData = getMarketData(symbols=['BTCUSDT'], exchange="BINANCE", n_bars=100)
-    if 'BTCUSDT' not in fullData or fullData['BTCUSDT'] is None:
-        print("❌ No data returned for BTCUSDT. Skipping logic.")
-        return
+    fullData = getMarketData(symbols=symbols, exchange="BINANCE", n_bars=100)
 
-    df = fullData['BTCUSDT']
-     
-    if df.empty:
-        print("❌ DataFrame is empty for BTCUSDT.")
-        return
- 
-    # Send the full DataFrame to botLogic
-    marketDataByPair = {"BTCUSDT": df}
-    signal = botLogic(marketDataByPair)
+    for idx, symbol in enumerate(symbols):
+        if symbol not in fullData or fullData[symbol] is None:
+            print(f"❌ No data returned for {symbol}. Skipping.")
+            continue
 
-    candle_time = df.index[-1]
+        df = fullData[symbol]
 
-    if signal:
-        send_message(symbol=signal["symbol"], signal=signal["signal"], SL=signal["SL"])
-        print(f"Time={candle_time}, Signal={signal['signal']}, SL={signal['SL']}")
+        if df is None or df.empty:
+            print(f"❌ DataFrame is empty for {symbol}. Skipping.")
+            continue
 
+        marketDataByPair = {symbol: df}
+        signal, candle_time = botLogic(marketDataByPair, symbol=symbol)
 
+        # Only send signal once per candle
+        if signal:
+            if symbol not in last_signal_time or last_signal_time[symbol] != candle_time:
+                send_message(symbol=signal["symbol"], signal=signal["signal"], SL=signal["SL"])
+                last_signal_time[symbol] = candle_time
+                print(f"✅ {symbol} | Time={candle_time}, Signal={signal['signal']}, SL={signal['SL']}")
+            else:
+                print(f"ℹ️ {symbol} | Signal already sent for candle {candle_time}")
+        else:
+            print(f"ℹ️ {symbol} | No signal for candle {candle_time}")
+
+        # Sleep only between symbols
+        if idx < len(symbols) - 1:
+            time.sleep(5)
+
+# bot()
