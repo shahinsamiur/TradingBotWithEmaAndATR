@@ -1,8 +1,10 @@
-from flask import Flask, request, jsonify, g
+from flask import Flask, request, jsonify
+import threading
 from bot import bot
 import os
 import sys
 import logging
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -12,16 +14,21 @@ def home():
 @app.route('/runBot', methods=['GET'])
 def runBot():
     try:
-        bot()
-        return "✅ Bot executed successfully"
+        # Run bot in a separate thread → async background job
+        threading.Thread(target=bot).start()
+        
+        # Respond immediately
+        return jsonify({"status": "ok", "message": "✅ Bot started in background"}), 200
+
     except Exception as e:
         print("❌ Bot error:", e)
         return jsonify({"status": "error", "message": str(e)}), 500
 
+
 @app.route('/coldStart', methods=['GET'])
 def coldStart():
     try:
-        logging.info("cooled Stared")
+        logging.info("cooled Started")
         sys.stdout.flush()
         return "🌡️ Cold Started"
     

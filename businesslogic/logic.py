@@ -36,7 +36,7 @@ def botLogic(marketData, symbol):
         f"🛑 *ATR Stop Loss (Sell)*: `{atr_sell:.2f}`"
     )
     print(message)
-    send_message(message)
+    # send_message(message)
 
     # Determine signal
     signal = None
