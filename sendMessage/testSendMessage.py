@@ -29,4 +29,4 @@ def send_message(Message) -> None:
         print("❌ Error sending message:", error)
 
 
-send_message("Test Message")
+# send_message("Test Message")
