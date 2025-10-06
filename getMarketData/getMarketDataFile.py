@@ -10,7 +10,7 @@ def getMarketData(symbols,exchange,n_bars):
     marketDataDict = {}
     for symbol in symbols:
 
-        h4_data = tv.get_hist(symbol=symbol, exchange=exchange, interval=Interval.in_4_hour, n_bars=n_bars)
+        h4_data = tv.get_hist(symbol=symbol, exchange=exchange, interval=Interval.in_15_minute, n_bars=n_bars)
         marketDataDict[symbol] = h4_data
     
     return marketDataDict

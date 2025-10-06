@@ -6,7 +6,7 @@ from sendMessage.sendMessage import send_message
 last_signal_time = {}
 
 def bot():
-    symbols = ['BTCUSDT', 'ETHUSDT', 'BNBUSDT']
+    symbols = ['EURUSD', 'GBPUSD', 'USDJPY', 'USDCHF', 'USDCAD']
 
     fullData = getMarketData(symbols=symbols, exchange="BINANCE", n_bars=100)
 

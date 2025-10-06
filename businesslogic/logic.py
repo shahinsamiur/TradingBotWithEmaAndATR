@@ -24,16 +24,16 @@ def botLogic(marketData, symbol):
     atr_sell = atr_stoploss(data=df, newTrend="sell_signal")
 
     # Optional logging
-    # message = (
-    #     f"📊 *Trend Detection Update:*\n\n"
-    #     f"Symbol : `{symbol}`\n"
-    #     f"*EMA 21* ➤ Prev: `{ema21_prev:.2f}`, Curr: `{ema21_curr:.2f}`\n"
-    #     f"*EMA 50* ➤ Prev: `{ema50_prev:.2f}`, Curr: `{ema50_curr:.2f}`\n\n"
-    #     f"🛒 *ATR Stop Loss (Buy)*: `{atr_buy:.2f}`\n"
-    #     f"🛑 *ATR Stop Loss (Sell)*: `{atr_sell:.2f}`"
-    # )
-    # print(message)
-    # send_message(message)
+    message = (
+        f"📊 *Trend Detection Update:*\n\n"
+        f"Symbol : `{symbol}`\n"
+        f"*EMA 21* ➤ Prev: `{ema21_prev:.2f}`, Curr: `{ema21_curr:.2f}`\n"
+        f"*EMA 50* ➤ Prev: `{ema50_prev:.2f}`, Curr: `{ema50_curr:.2f}`\n\n"
+        f"🛒 *ATR Stop Loss (Buy)*: `{atr_buy:.2f}`\n"
+        f"🛑 *ATR Stop Loss (Sell)*: `{atr_sell:.2f}`"
+    )
+    print(message)
+    send_message(message)
 
     # Determine signal
     signal = None
