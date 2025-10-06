@@ -1,12 +1,12 @@
 import requests
 
 # === Configuration ===
-BOT_TOKEN = '8100528566:AAG1B8WC_BgD2yN3t7U8NFeuMJDvcLp4mak'
+BOT_TOKEN = '8379054284:AAEkU3waf6LS1_XGOKS2Dg87_1XCkU93CzM'
 CHAT_ID = '5834307479'
 API_URL = f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage'
 
 
-def send_message(Message) -> None:
+def send_error_message(Message) -> None:
 
     # message_data = f"Pair: {symbol}\nSide: {signal}\nSL: {SL}"
 
@@ -29,4 +29,4 @@ def send_message(Message) -> None:
         print("❌ Error sending message:", error)
 
 
-send_message("Test Message")
+# send_message("Test Message")
