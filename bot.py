@@ -8,7 +8,7 @@ last_signal_time = {}
 def bot():
     symbols = ['EURUSD', 'GBPUSD', 'USDJPY', 'USDCHF', 'USDCAD']
 
-    fullData = getMarketData(symbols=symbols, exchange="BINANCE", n_bars=100)
+    fullData = getMarketData(symbols=symbols, exchange="OANDA", n_bars=100)
 
     for idx, symbol in enumerate(symbols):
         if symbol not in fullData or fullData[symbol] is None:
