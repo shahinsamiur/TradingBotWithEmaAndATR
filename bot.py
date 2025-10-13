@@ -8,7 +8,7 @@ last_signal_time = {}
 
 def bot():
     try:
-        symbols = ['EURUSD', 'GBPUSD', 'USDJPY', 'USDCHF', 'USDCAD']
+        symbols = ['EURUSD']
 
         fullData = getMarketData(symbols=symbols, exchange="OANDA", n_bars=100)
 
