@@ -19,9 +19,6 @@ def botLogic(marketData, symbol):
     ema50_curr = ema({symbol: df.iloc[:-1]}, symbol, 'close', 50)
     ema21_curr = ema({symbol: df.iloc[:-1]}, symbol, 'close', 21)
 
-    # Calculate ATR stoploss
-    atr_buy = atr_stoploss(data=df, newTrend="buy_signal")
-    atr_sell = atr_stoploss(data=df, newTrend="sell_signal")
 
     # Optional logging
     # message = (
@@ -40,10 +37,10 @@ def botLogic(marketData, symbol):
     if ema21_prev < ema50_prev and ema21_curr > ema50_curr:
         newTrend = "buy_signal"
         SL = atr_stoploss(data=df, newTrend=newTrend)
-        signal = {"signal": "buy_signal", "SL": SL, "symbol": symbol}
+        signal = {"signal": "buy_signal", "SL": SL, "symbol": symbol ,"entry": df.index[-1]['close']}
     elif ema21_prev > ema50_prev and ema21_curr < ema50_curr:
         newTrend = "sell_signal"
         SL = atr_stoploss(data=df, newTrend=newTrend)
-        signal = {"signal": "sell_signal", "SL": SL, "symbol": symbol}
+        signal = {"signal": "sell_signal", "SL": SL, "symbol": symbol , "entry": df.index[-1]['close']}
 
     return signal, df.index[-2]  # return last fully closed candle time
