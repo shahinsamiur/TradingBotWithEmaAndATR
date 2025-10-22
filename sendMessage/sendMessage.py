@@ -6,9 +6,9 @@ CHAT_ID = '5834307479'
 API_URL = f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage'
 
 
-def send_message(symbol: str, signal: str, SL: float) -> None:
+def send_message(symbol: str, signal: str, SL: float , entry: float) -> None:
 
-    message_data = f"Pair: {symbol}\nSide: {signal}\nSL: {SL}"
+    message_data = f"Pair: {symbol}\nSide: {signal}\nSL: {SL} \nEntry: {entry} "
 
     payload = {
         'chat_id': CHAT_ID,

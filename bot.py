@@ -30,7 +30,7 @@ def bot():
                 # Only send signal once per candle
                 if signal:
                     if symbol not in last_signal_time or last_signal_time[symbol] != candle_time:
-                        send_message(symbol=signal["symbol"], signal=signal["signal"], SL=signal["SL"])
+                        send_message(symbol=signal["symbol"], signal=signal["signal"], SL=signal["SL"] , entry=signal["entry"])
                         last_signal_time[symbol] = candle_time
                         print(f"✅ {symbol} | Time={candle_time}, Signal={signal['signal']}, SL={signal['SL']}")
                     else:
