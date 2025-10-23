@@ -7,7 +7,7 @@ def sheetEntryFunction(message):
     }
     print(payload)
     try:
-        response = requests.post(localHost, json=payload)
+        response = requests.post(API_URL, json=payload)
         response.raise_for_status() 
         result = response.json()
 
