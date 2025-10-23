@@ -4,7 +4,7 @@ from bot import bot
 import os
 import sys
 import logging
-
+import requests
 app = Flask(__name__)
 
 @app.route('/')
@@ -14,26 +14,45 @@ def home():
 @app.route('/runBot', methods=['GET'])
 def runBot():
     try:
-        # Run bot in a separate thread → async background job
+
         threading.Thread(target=bot).start()
         
-        # Respond immediately
-        return jsonify({"status": "ok", "message": "✅ Bot started in background"}), 200
+
+        return jsonify({"status": "ok", "message": " Bot started in background"}), 200
 
     except Exception as e:
-        print("❌ Bot error:", e)
+        print(" Bot error:", e)
         return jsonify({"status": "error", "message": str(e)}), 500
+
+
+def trigger_backend():
+
+    try:
+        backend_url = "https://bot-performance-data-entry.onrender.com/"
+        logging.info("⚙️ Sending request to backend server...")
+        response = requests.get(backend_url, timeout=10)
+        if response.status_code == 200:
+            logging.info(" Backend cold start successful")
+        else:
+            logging.warning(f" Backend responded with {response.status_code}")
+    except Exception as e:
+        logging.error(f" Backend call failed: {e}")
+    finally:
+        sys.stdout.flush()
 
 
 @app.route('/coldStart', methods=['GET'])
 def coldStart():
     try:
-        logging.info("cooled Started")
+        logging.info(" Lambda cold start triggered")
         sys.stdout.flush()
-        return "🌡️ Cold Started"
-    
+
+  
+        threading.Thread(target=trigger_backend).start() 
+        return jsonify({"status": "ok", "message": " Cold start accepted"}), 200
+
     except Exception as e:
-        print(e)
+        logging.error(f" Cold start error: {e}")
         return jsonify({"status": "error", "message": str(e)}), 400
 
 if __name__ == '__main__':
