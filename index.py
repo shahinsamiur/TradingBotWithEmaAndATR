@@ -29,12 +29,12 @@ def trigger_backend():
 
     try:
         backend_url = "https://bot-performance-data-entry.onrender.com/"
-        logging.info("⚙️ Sending request to backend server...")
-        response = requests.get(backend_url, timeout=10)
+        print("⚙️ Sending request to backend server...")
+        response = requests.get(backend_url)
         if response.status_code == 200:
-            logging.info(" Backend cold start successful")
+            print(" Backend cold start successful")
         else:
-            logging.warning(f" Backend responded with {response.status_code}")
+            print(f" Backend responded with {response.status_code}")
     except Exception as e:
         logging.error(f" Backend call failed: {e}")
     finally:

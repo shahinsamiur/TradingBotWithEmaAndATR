@@ -14,6 +14,6 @@ def sheetEntryFunction(message):
         if result.get("ok"):
             print("data Entred")
         else:
-            print("⚠️ Telegram API error:", result)
+            print(" Telegram API error:", result)
     except requests.exceptions.RequestException as error:
-        print("❌ Error sending message:", error)
+        print(" Error sending message:", error)
