@@ -1,5 +1,5 @@
 import requests
-API_URL = f'https://bot-performance-data-entry.onrender.com/webhook'
+API_URL = f'https://trading-bot-with-ema-and-atr-p57o.vercel.app/webhook'
 localHost=f'http://192.168.68.114:4000/webhook'
 def sheetEntryFunction(message):
     payload = {

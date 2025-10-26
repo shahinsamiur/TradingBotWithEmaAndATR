@@ -28,7 +28,7 @@ def runBot():
 def trigger_backend():
 
     try:
-        backend_url = "https://bot-performance-data-entry.onrender.com/"
+        backend_url = "https://trading-bot-with-ema-and-atr-p57o.vercel.app/"
         print("⚙️ Sending request to backend server...")
         response = requests.get(backend_url)
         if response.status_code == 200:
