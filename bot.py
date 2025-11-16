@@ -9,6 +9,7 @@ last_signal_time = {}
 def bot():
     try:
         symbols = ['EURUSD']
+        print("hitted bot and symbols",symbols)
 
         fullData = getMarketData(symbols=symbols, exchange="OANDA", n_bars=100)
 
@@ -19,7 +20,7 @@ def bot():
                     continue
 
                 df = fullData[symbol]
-
+                print("market data got")
                 if df is None or df.empty:
                     print(f"❌ DataFrame is empty for {symbol}. Skipping.")
                     continue

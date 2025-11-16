@@ -16,7 +16,7 @@ def runBot():
     try:
 
         threading.Thread(target=bot).start()
-        
+        print(" Bot started in background")
 
         return jsonify({"status": "ok", "message": " Bot started in background"}), 200
 
