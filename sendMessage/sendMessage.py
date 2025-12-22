@@ -1,7 +1,6 @@
 import requests
 from dataEntry.sheetEntry import sheetEntryFunction 
-# === Configuration ===
-BOT_TOKEN = '8100528566:AAG1B8WC_BgD2yN3t7U8NFeuMJDvcLp4mak'
+BOT_TOKEN = '8521395998:AAGsRV45rt2vhGRoh2UWLIE2mE1BfZPBT48'
 CHAT_ID = '5834307479'
 API_URL = f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage'
 
