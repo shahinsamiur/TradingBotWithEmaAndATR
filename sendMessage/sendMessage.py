@@ -1,7 +1,14 @@
 import requests
 from dataEntry.sheetEntry import sheetEntryFunction 
-BOT_TOKEN = '8521395998:AAGsRV45rt2vhGRoh2UWLIE2mE1BfZPBT48'
-CHAT_ID = '5834307479'
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
+# BOT_TOKEN = '8521395998:AAGsRV45rt2vhGRoh2UWLIE2mE1BfZPBT48'
+# CHAT_ID = '5834307479'
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+CHAT_ID = os.getenv('CHAT_ID')
 API_URL = f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage'
 
 
