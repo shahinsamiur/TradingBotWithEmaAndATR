@@ -1,8 +1,15 @@
 import requests
+from dotenv import load_dotenv
+import os
 
+
+# Load environment variables from .env file
+load_dotenv()
 # === Configuration ===
-BOT_TOKEN = '8100528566:AAG1B8WC_BgD2yN3t7U8NFeuMJDvcLp4mak'
-CHAT_ID = '5834307479'
+
+
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+CHAT_ID = os.getenv('CHAT_ID')
 API_URL = f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage'
 
 
